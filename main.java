@@ -24,7 +24,10 @@ public class Main extends JavaPlugin {
 		
 		Player player = (Player) sender;
 		
-	if (player.hasPermission("permission.check")) {
+		if (!player.hasPermission("permission.check")) {
+			player.sendMessage(ChatColor.RED + "You do not have permission to run this command.");
+			return true;
+		}
 		
 		if (args.length == 0) {
 			player.sendMessage(ChatColor.RED + "You did not specify a player!");
@@ -55,7 +58,6 @@ public class Main extends JavaPlugin {
 			player.sendMessage(ChatColor.RED + targetPlayer.getDisplayName() + " does not have permission: ' " + ChatColor.GREEN + args[1] + ChatColor.WHITE + "'");
 		}
 		
-	}
 		return true;
 	}
 }
