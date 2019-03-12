@@ -1,0 +1,7 @@
+name: PermissionChecker
+main: me.NickC0610.permissionChecker.Main
+version: 1.0
+commands:
+    permission:
+        description: Checks a players Permission
+        usage: /<command>
