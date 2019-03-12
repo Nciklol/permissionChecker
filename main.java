@@ -21,7 +21,10 @@ public class Main extends JavaPlugin {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args) {
+		
 		Player player = (Player) sender;
+		
+	if (player.hasPermission("permission.check")) {
 		
 		if (args.length == 0) {
 			player.sendMessage(ChatColor.RED + "You did not specify a player!");
@@ -36,12 +39,23 @@ public class Main extends JavaPlugin {
 			return true;
 		}
 		
-		if (targetPlayer.hasPermission(this.getConfig().getString("permission"))) {
-			player.sendMessage(ChatColor.GOLD + targetPlayer.getDisplayName() + " has the permission: '" + ChatColor.GREEN + this.getConfig().getString("permission") + ChatColor.GOLD + "'");
-		} else {
-			player.sendMessage(ChatColor.RED + targetPlayer.getDisplayName() + " does not have permission: ' " + ChatColor.GREEN + this.getConfig().getString("permission") + ChatColor.RED + "'");
+		if (args[1].contentEquals("")) {
+			if (targetPlayer.hasPermission(this.getConfig().getString("permission"))) {
+				player.sendMessage(ChatColor.GOLD + targetPlayer.getDisplayName() + " has the permission: '" + ChatColor.GREEN + this.getConfig().getString("permission") + ChatColor.WHITE + "'");
+			} else {
+				player.sendMessage(ChatColor.RED + targetPlayer.getDisplayName() + " does not have permission: ' " + ChatColor.GREEN + this.getConfig().getString("permission") + ChatColor.WHITE + "'");
+			}
+			
+			return true;
 		}
 		
+		if (targetPlayer.hasPermission(args[1])) {
+			player.sendMessage(ChatColor.GOLD + targetPlayer.getDisplayName() + " has the permission: '" + ChatColor.GREEN + args[1] + ChatColor.WHITE + "'");
+		} else {
+			player.sendMessage(ChatColor.RED + targetPlayer.getDisplayName() + " does not have permission: ' " + ChatColor.GREEN + args[1] + ChatColor.WHITE + "'");
+		}
+		
+	}
 		return true;
 	}
 }
